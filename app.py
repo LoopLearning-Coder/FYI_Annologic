@@ -4,36 +4,27 @@ from sklearn.pipeline import Pipeline
 import pandas as pd
 import numpy as np
 import pickle
-from pycaret.regression import *
+from lightgbm.sklearn import LightGBMRegressor
 from sklearn.metrics import mean_squared_error
 
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
 st.title('FYI - Annologic Demo')
-@st.cache_resource
-def load_model(train):
-    s = setup(train,target='popularity',session_id=5522)
-    model = create_model('lightgbm') #pickle.load(open('popularity.pkl','rb'))
-    return model
-    
-def main():
-    test = pd.read_csv('test.csv')
-    train = pd.read_csv('train.csv')
 
-    
-    
+def main():
     with st.spinner("Unpacking model... Please wait."):
-        model = load_model(train)
-        
+        model = pickle.load(open('popularity.pkl','rb'))
+
     #st.sidebar.image(imag,use_column_width=True)
 
 
     st.sidebar.header('Predict the Popularity of your Music')
-    
+    test = pd.read_csv('test.csv')
+    train = pd.read_csv('train.csv')
     if st.sidebar.button('Check Model Performance'):
-        train_rmse = mean_squared_error(train['popularity'],predict_model(model,train.drop('popularity',axis=1))['prediction_label'],squared=False)
-        test_rmse = mean_squared_error(test['popularity'],predict_model(model,test.drop('popularity',axis=1))['prediction_label'],squared=False)
+        train_rmse = mean_squared_error(train['popularity'],model.predict(train.drop('popularity',axis=1)),squared=False)
+        test_rmse = mean_squared_error(test['popularity'],model.predict(test.drop('popularity',axis=1)),squared=False)
         col1, col2 = st.columns(2,gap='medium')
     
         col1.metric('Train RMSE:', str(round(train_rmse,3))+'\%',help='Performance of model on train data')
@@ -70,8 +61,8 @@ def main():
                                                                  'track_genre':[genre]})
     if st.button('Predict Popularity'):
         #st.write('Predicting...')
-        prediction = predict_model(model,pred_df)
-        #val = prediction.iloc[0,
+        prediction = model.predict(pred_df)
+        
         st.write(f'The predicted popularity of the music is {round(prediction,2)}\%')
 
 if __name__ == '__main__':
