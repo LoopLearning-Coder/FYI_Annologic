@@ -12,7 +12,7 @@ st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
 st.title('FYI - Annologic Demo')
 @st.cache_resource
-def load_model():
+def load_model(train):
     s = setup(train,target='popularity',session_id=5522)
     model = create_model('lightgbm') #pickle.load(open('popularity.pkl','rb'))
     return model
@@ -24,7 +24,7 @@ def main():
     
     
     with st.spinner("Unpacking model... Please wait."):
-        model = load_model()
+        model = load_model(train)
         
     #st.sidebar.image(imag,use_column_width=True)
 
