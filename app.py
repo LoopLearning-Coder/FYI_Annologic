@@ -13,15 +13,18 @@ st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 st.title('FYI - Annologic Demo')
 
 def main():
+    test = pd.read_csv('test.csv')
+    train = pd.read_csv('train.csv')
+    s = setup(train,target='popularity',session_id=5522)
+    
     with st.spinner("Unpacking model... Please wait."):
-        model = pickle.load(open('popularity.pkl','rb'))
-
+        model = create_model('lightgbm') #pickle.load(open('popularity.pkl','rb'))
+        
     #st.sidebar.image(imag,use_column_width=True)
 
 
     st.sidebar.header('Predict the Popularity of your Music')
-    test = pd.read_csv('test.csv')
-    train = pd.read_csv('train.csv')
+    
     if st.sidebar.button('Check Model Performance'):
         train_rmse = mean_squared_error(train['popularity'],predict_model(model,train.drop('popularity',axis=1))['prediction_label'],squared=False)
         test_rmse = mean_squared_error(test['popularity'],predict_model(model,test.drop('popularity',axis=1))['prediction_label'],squared=False)
