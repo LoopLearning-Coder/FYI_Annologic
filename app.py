@@ -11,7 +11,7 @@ from sklearn.metrics import mean_squared_error
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
 st.title('FYI - Annologic Demo')
-@cache_resource
+@st.cache_resource
 def load_model():
     s = setup(train,target='popularity',session_id=5522)
     model = create_model('lightgbm') #pickle.load(open('popularity.pkl','rb'))
