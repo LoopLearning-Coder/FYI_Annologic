@@ -4,7 +4,7 @@ from sklearn.pipeline import Pipeline
 import pandas as pd
 import numpy as np
 import pickle
-from lightgbm.sklearn import LightGBMRegressor
+from lightgbm.sklearn import LGBMRegressor
 from sklearn.metrics import mean_squared_error
 
 
