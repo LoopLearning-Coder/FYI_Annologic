@@ -6,3 +6,4 @@ seaborn
 matplotlib==3.8.2
 missingno
 category_encoders
+pycaret
