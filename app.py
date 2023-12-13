@@ -11,14 +11,20 @@ from sklearn.metrics import mean_squared_error
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
 st.title('FYI - Annologic Demo')
-
+@cache_resource
+def load_model():
+    s = setup(train,target='popularity',session_id=5522)
+    model = create_model('lightgbm') #pickle.load(open('popularity.pkl','rb'))
+    return model
+    
 def main():
     test = pd.read_csv('test.csv')
     train = pd.read_csv('train.csv')
-    s = setup(train,target='popularity',session_id=5522)
+
+    
     
     with st.spinner("Unpacking model... Please wait."):
-        model = create_model('lightgbm') #pickle.load(open('popularity.pkl','rb'))
+        model = load_model()
         
     #st.sidebar.image(imag,use_column_width=True)
 
