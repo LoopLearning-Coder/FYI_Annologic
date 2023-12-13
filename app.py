@@ -57,7 +57,7 @@ def main():
     
     
 
-    pred_df = pd.DataFrame({'duration_ms':[duration],'explicit':[int(explicit)],
+    pred_df = pd.DataFrame({'duration_ms':[duration],'explicit':[explicit.map({True:1,False:0})],
                                                                  'track_genre':[genre]})
     if st.button('Predict Popularity'):
         #st.write('Predicting...')
