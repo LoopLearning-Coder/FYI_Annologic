@@ -66,7 +66,7 @@ def main():
         #st.write('Predicting...')
         prediction = model.predict(pred_df)
         
-        st.write(f'The predicted popularity of the music is {round(prediction,2)}\%')
+        st.write(f'The predicted popularity of the music is {round(prediction[0],2)}\%')
 
 if __name__ == '__main__':
     main()
