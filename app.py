@@ -4,7 +4,7 @@ from sklearn.pipeline import Pipeline
 import pandas as pd
 import numpy as np
 import pickle
-from pycaret.regression import predict_model
+from pycaret.regression import *
 from sklearn.metrics import mean_squared_error
 
 
