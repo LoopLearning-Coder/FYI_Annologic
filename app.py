@@ -32,7 +32,7 @@ def main():
         
     
     duration = st.slider('duration in milliseconds:',0,5237295,100)
-    explicit = st.selectbox('Song has explicit content?',['True','False'])
+    explicit = st.selectbox('Song has explicit content?',[True,False])
     
     genre = st.selectbox('Which Genre is your music',['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient',
        'anime', 'black-metal', 'bluegrass', 'blues', 'brazil',
