@@ -33,7 +33,10 @@ def main():
     
     duration = st.slider('duration in milliseconds:',0,5237295,100)
     explicit = st.selectbox('Song has explicit content?',[True,False])
-    
+    if explicit == 'True':
+        explicit = 1
+    else:
+        explicit = 0
     genre = st.selectbox('Which Genre is your music',['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient',
        'anime', 'black-metal', 'bluegrass', 'blues', 'brazil',
        'breakbeat', 'british', 'cantopop', 'chicago-house', 'children',
@@ -57,7 +60,7 @@ def main():
     
     
 
-    pred_df = pd.DataFrame({'duration_ms':[duration],'explicit':[explicit.map({True:1,False:0})],
+    pred_df = pd.DataFrame({'duration_ms':[duration],'explicit':[explicit],
                                                                  'track_genre':[genre]})
     if st.button('Predict Popularity'):
         #st.write('Predicting...')
