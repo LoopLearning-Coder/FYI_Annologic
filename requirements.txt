@@ -1,0 +1,8 @@
+streamlit
+pandas<2
+numpy
+scikit-learn
+seaborn
+matplotlib==3.8.2
+missingno
+category_encoders
