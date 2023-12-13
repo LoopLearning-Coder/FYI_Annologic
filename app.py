@@ -27,8 +27,8 @@ def main():
         test_rmse = mean_squared_error(test['popularity'],model.predict(test.drop('popularity',axis=1)),squared=False)
         col1, col2 = st.columns(2,gap='medium')
     
-        col1.metric('Train RMSE:', str(round(train_rmse,3))+'\%',help='Performance of model on train data')
-        col2.metric('Test RMSE:', str(round(test_rmse,3))+'\%',help='Performance of model on test data')
+        col1.metric('Train RMSE:', str(round(train_rmse,3))+'%',help='Performance of model on train data')
+        col2.metric('Test RMSE:', str(round(test_rmse,3))+'%',help='Performance of model on test data')
         
     
     duration = st.slider('duration in milliseconds:',0,5237295,100)
