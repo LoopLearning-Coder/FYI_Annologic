@@ -111,7 +111,7 @@ def main():
             Returns a list of tuples with document name and plagiarism score.
             """
             plagiarism_scores = []
-            new_doc_content = read_and_preprocess(new_document)
+            new_doc_content = preprocesss_text(new_document)
         
             for doc in training_documents:
                 training_doc_content = read_and_preprocess(doc)
@@ -141,8 +141,8 @@ def main():
         # Textbox for user input
         if method == 'Enter text':
             user_input = st.text_area("Enter song lyrics:")
-            save_to_file(user_input,'user.txt')
-            new_file = 'user.txt'
+            #save_to_file(user_input,'user.txt')
+            string_data = user_input
         
         else:# File upload
             uploaded_file = st.file_uploader("Upload a file", type=["txt"])
@@ -151,15 +151,16 @@ def main():
                 # If a file is uploaded, read its content
                 #with open(uploaded_file, 'r') as t
                 #file_contents = save_to_file(file_contents)
-                new_file = uploaded_file.name
+                stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+                string_data = stringio.read()
             
                 
             
             # Check for plagiarism
         if st.button("Check for similarity"):
-            new_document = './' + new_file
+            new_document = string_data
             plagiarism_results = check_plagiarism(new_document, training_docs)
-            st.write(f'The input song is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
+            st.write(f'The input lyric is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
         
             #if st.button(f'View {plagiarism_results[0][0]}'): 
             #   with open(plagiarism_results[0][0], 'r') as file:
