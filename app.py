@@ -112,7 +112,7 @@ def main():
             Returns a list of tuples with document name and plagiarism score.
             """
             plagiarism_scores = []
-            new_doc_content = preprocesss_text(new_document)
+            new_doc_content = preprocess_text(new_document)
         
             for doc in training_documents:
                 training_doc_content = read_and_preprocess(doc)
