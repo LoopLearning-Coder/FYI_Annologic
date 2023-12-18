@@ -72,6 +72,103 @@ def main():
     
     elif page == 'Similarity Test':
         st.header('Check Similarity of your Lyrics')
-
+        import os
+        import re
+        import string
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity
+        from typing import List, Tuple
+        
+        def preprocess_text(text: str) -> str:
+            """
+            Preprocess the text by removing special characters and converting to lowercase.
+            """
+            text = text.lower()
+            text = re.sub(r'\d+', '', text)  # Remove numbers
+            text = text.translate(str.maketrans("", "", string.punctuation))  # Remove punctuation
+            return text
+        
+        def read_and_preprocess(file_path: str) -> str:
+            """
+            Read a text file and preprocess its content.
+            """
+            with open(file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+            return preprocess_text(content)
+        
+        def calculate_cosine_similarity(text1: str, text2: str) -> float:
+            """
+            Calculate the cosine similarity between two texts.
+            """
+            vectorizer = TfidfVectorizer()
+            tfidf_matrix = vectorizer.fit_transform([text1, text2])
+            similarity = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])
+            return similarity[0][0]
+        
+        def check_plagiarism(new_document: str, training_documents: List[str]) -> List[Tuple[str, float]]:
+            """
+            Check for plagiarism between a new document and a set of training documents.
+            Returns a list of tuples with document name and plagiarism score.
+            """
+            plagiarism_scores = []
+            new_doc_content = read_and_preprocess(new_document)
+        
+            for doc in training_documents:
+                training_doc_content = read_and_preprocess(doc)
+                score = calculate_cosine_similarity(new_doc_content, training_doc_content)
+                plagiarism_scores.append((doc, score))
+        
+            # Sort the scores in descending order
+            plagiarism_scores.sort(key=lambda x: x[1], reverse=True)
+            
+        
+            return plagiarism_scores
+        
+        # Get a list of files
+        all_file = [file for file in os.listdir() if file.startswith('song')]
+        
+        
+        
+        
+        training_docs = all_file  # Containes filenames of list of files in database
+        
+        
+        
+        if st.button('View song directory'): 
+            training_docs
+        
+        method = st.selectbox('How do you want to enter your lyrics',['upload txt','Enter text'])
+        # Textbox for user input
+        if method == 'Enter text':
+            user_input = st.text_area("Enter song lyrics:")
+            save_to_file(user_input,'user.txt')
+            new_file = 'user.txt'
+        
+        else:# File upload
+            uploaded_file = st.file_uploader("Upload a file", type=["txt"])
+        
+            if uploaded_file is not None:
+                # If a file is uploaded, read its content
+                #with open(uploaded_file, 'r') as t
+                #file_contents = save_to_file(file_contents)
+                new_file = uploaded_file.name
+            
+                
+            
+            # Check for plagiarism
+        if st.button("Check for similarity"):
+            new_document = new_file
+            plagiarism_results = check_plagiarism(new_document, training_docs)
+            st.write(f'The input song is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
+        
+            #if st.button(f'View {plagiarism_results[0][0]}'): 
+            #   with open(plagiarism_results[0][0], 'r') as file:
+            #      data = file.read()
+            # st.text(data)
+        def save_to_file(content,name):
+            # Save content to a text file
+            with open(name, "w") as file:
+                file.write(content)
+            st.success(f"Text saved to {name}")
 if __name__ == '__main__':
     main()
