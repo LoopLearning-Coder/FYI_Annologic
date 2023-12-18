@@ -157,7 +157,7 @@ def main():
             
             # Check for plagiarism
         if st.button("Check for similarity"):
-            new_document = new_file
+            new_document = './' + new_file
             plagiarism_results = check_plagiarism(new_document, training_docs)
             st.write(f'The input song is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
         
