@@ -6,6 +6,7 @@ import numpy as np
 import pickle
 from lightgbm.sklearn import LGBMRegressor
 from sklearn.metrics import mean_squared_error
+from io import StringIO
 
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
