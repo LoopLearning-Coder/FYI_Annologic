@@ -7,7 +7,7 @@ import pickle
 from lightgbm.sklearn import LGBMRegressor
 from sklearn.metrics import mean_squared_error
 from io import StringIO
-
+import xgboost
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
@@ -34,7 +34,9 @@ def main():
         #col2.metric('Test RMSE:', str(round(test_rmse,3))+'%',help='Performance of model on test data')
             
         
-        duration = st.slider('duration in milliseconds:',0,5237295,100)
+        key = st.slider('key:',0,11,1)
+        speechiness = st.slider('Speechiness:',0,1,0.01)
+        liveness = st.slider('Liveness:',0,1,0.01)
         explicit = st.selectbox('Song has explicit content?',[True,False])
         if explicit == 'True':
             explicit = 1
@@ -63,8 +65,8 @@ def main():
         
         
     
-        pred_df = pd.DataFrame({'duration_ms':[duration],'explicit':[explicit],
-                                                                     'track_genre':[genre]})
+        pred_df = pd.DataFrame({'track_genre':[genre],'explicit':[explicit],
+                               'key':[key],'speechiness':[speechiness],'liveness':[liveness]})
         if st.button('Predict Popularity'):
             #st.write('Predicting...')
             prediction = model.predict(pred_df)
