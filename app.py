@@ -35,8 +35,8 @@ def main():
             
         
         key = st.slider('key:',0,11,1)
-        speechiness = st.slider('Speechiness:',0,1,0.01)
-        liveness = st.slider('Liveness:',0,1,0.01)
+        speechiness = st.slider('Speechiness:',0.0,1.0,0.01)
+        liveness = st.slider('Liveness:',0.0,1.0,0.01)
         explicit = st.selectbox('Song has explicit content?',[True,False])
         if explicit == 'True':
             explicit = 1
