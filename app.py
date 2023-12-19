@@ -15,9 +15,15 @@ st.title('FYI - Annologic Demo')
 
 def main():
     
-    page = st.sidebar.selectbox('Choose a task',['Similarity Test','Popularity Predictor'])
+    page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
     #st.sidebar.image(imag,use_column_width=True)
-
+    if page == 'Home':
+        st.header('Welcome to the Demo')
+        st.write('This web app is created to illustrate two machine learning use cases that will impact the lives of creatives on the FYI application')
+        st.write('These can be thought of as ice-breakers to the further work ideas Annologic will work on for FYI.')
+        st.write('You can navigate to these two applications via the dropdown on the left sidebar. Go ahead and explore:') 
+        st.write('1. Similarity Test')
+        st.write('2. Popularity Predictor')
     if page == 'Popularity Predictor':
         st.header('Predict the Popularity of your Music')
         with st.spinner("Unpacking model... Please wait."):
