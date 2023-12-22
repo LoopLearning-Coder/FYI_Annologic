@@ -40,7 +40,7 @@ def main():
         #col2.metric('Test RMSE:', str(round(test_rmse,3))+'%',help='Performance of model on test data')
             
         
-        key = st.slider('key:',0,11,1)
+        key = st.selectbox('key:',['C','C#','D','D#','E','F','E#','F#','G','G#','A','A#','B'])
         speechiness = st.slider('Speechiness:',0.0,1.0,0.01)
         liveness = st.slider('Liveness:',0.0,1.0,0.01)
         explicit = st.selectbox('Song has explicit content?',[True,False])
@@ -73,6 +73,8 @@ def main():
     
         pred_df = pd.DataFrame({'track_genre':[genre],'explicit':[explicit],
                                'key':[key],'speechiness':[speechiness],'liveness':[liveness]})
+        pred_df['key'] = pred_df['key'].map({'C':0,'C#':1,'D':2,'D#':3,'E':4,'F':5,'E#':5,'F#':6,
+                                             'G':7,'G#':8,'A':9,'A#':10,'B':11}
         if st.button('Predict Popularity'):
             #st.write('Predicting...')
             prediction = model.predict(pred_df)
