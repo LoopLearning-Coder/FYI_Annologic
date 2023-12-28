@@ -54,7 +54,7 @@ def main():
         #col2.metric('Test RMSE:', str(round(test_rmse,3))+'%',help='Performance of model on test data')
             
         
-        key = st.selectbox('key:',['C','B♯','C♯','D♭','D','D♯','E♭','E','F♭','F','E♯','F♯','G♭','G','G♯','A♭','A','B♭','A♯','B'])
+        key = st.selectbox('Key:',['C','B♯','C♯','D♭','D','D♯','E♭','E','F♭','F','E♯','F♯','G♭','G','G♯','A♭','A','B♭','A♯','B'])
         speechiness = st.slider('Speechiness:',0.0,1.0,0.01)
         liveness = st.slider('Liveness:',0.0,1.0,0.01)
         explicit = st.selectbox('Song has explicit content?',[True,False])
