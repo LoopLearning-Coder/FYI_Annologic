@@ -25,7 +25,7 @@ def main():
     col2.image(imag,width=80)
 
     st.sidebar.text("")
-    st.sidebar.header('Welcome, User 1')
+    st.sidebar.header('Welcome, Creative')
 
     st.sidebar.text("")
     page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
