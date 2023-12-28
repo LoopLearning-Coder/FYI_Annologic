@@ -8,6 +8,9 @@ from lightgbm.sklearn import LGBMRegressor
 from sklearn.metrics import mean_squared_error
 from io import StringIO
 import xgboost
+from PIL import Image
+
+imag = Image.open('FYILOGO.png')
 
 st.set_page_config(layout='wide', initial_sidebar_state='expanded')
 
@@ -19,7 +22,8 @@ st.title('FYI - Annologic Demo')
 def main():
     
     page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
-    #st.sidebar.image(imag,use_column_width=True)
+    
+    st.sidebar.image(imag,use_column_width=True)
     if page == 'Home':
         st.header('Welcome to the Demo')
         st.write('This web app is created to illustrate two machine learning use cases that will impact the lives of creatives on the FYI application')
