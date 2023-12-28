@@ -187,7 +187,10 @@ def main():
             plagiarism_results = check_plagiarism(new_document, training_docs)
             chosen = plagiarism_results[0][0]
             st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {plagiarism_results[0][1]}')
-
+            st.write(f'Below is the content of {plagiarism_results[0][1]}:')
+            with open(chosen, 'r') as file:
+                file_content = file.read()
+            st.text(file_content)
         if chosen is not None:
             if st.button(f'Inspect {chosen}'):
                 try:
