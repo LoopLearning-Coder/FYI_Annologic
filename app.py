@@ -24,7 +24,7 @@ def main():
     col1,col2,col3 = st.sidebar.columns((1,1,1),gap='medium')
     col2.image(imag,width=80)
 
-    st.write('Welcome, User 1')
+    st.sidebar.write('Welcome, User 1')
     page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
     
     
