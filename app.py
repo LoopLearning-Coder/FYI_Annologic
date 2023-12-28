@@ -180,23 +180,25 @@ def main():
                 string_data = stringio.read()
             
                 
-            
+        chosen = None    
             # Check for plagiarism
         if st.button("Check for similarity"):
             new_document = string_data
             plagiarism_results = check_plagiarism(new_document, training_docs)
-            st.write(f'The input lyric is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
-            
-        viewsong = st.checkbox(f'Inspect {plagiarism_results[0][0]}')
-        if viewsong:
-            try:
-                with open(plagiarism_results[0][0], 'r') as file:
-                    file_content = file.read()
-                
-                # Display the contents of the file on the page
-                st.text(file_content)
-            except FileNotFoundError:
-                st.error('File not found. Please ensure the file is in the app directory.')
+            chosen = plagiarism_results[0][0]
+            st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {plagiarism_results[0][1]}')
+
+        if chosen is not None:
+            viewsong = st.checkbox(f'Inspect {chosen}')
+            if viewsong:
+                try:
+                    with open(chosen, 'r') as file:
+                        file_content = file.read()
+                    
+                    # Display the contents of the file on the page
+                    st.text(file_content)
+                except FileNotFoundError:
+                    st.error('File not found. Please ensure the file is in the app directory.')
         
             
         def save_to_file(content,name):
