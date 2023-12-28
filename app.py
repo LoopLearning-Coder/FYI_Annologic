@@ -193,9 +193,11 @@ def main():
             st.session_state.chosen_file = chosen
             st.session_state.button_clicked = False
             st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {plagiarism_results[0][1]}')
-            
-        if st.button(f'Inspect {st.session_state.chosen_file}'):
-            st.session_state.button_clicked = True
+
+
+       if chosen is not None:     
+            if st.button(f'Inspect {st.session_state.chosen_file}'):
+                st.session_state.button_clicked = True
             
         if st.session_state.button_clicked and st.session_state.chosen_file:
             try:
