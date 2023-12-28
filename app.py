@@ -179,28 +179,34 @@ def main():
                 stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
                 string_data = stringio.read()
             
-                
+        if 'chosen_file' not in st.session_state:
+            st.session_state.chosen_file = None
+
+        if 'button_clicked' not in st.session_state:
+            st.session_state.button_clicked = False       
         chosen = None    
             # Check for plagiarism
         if st.button("Check for similarity"):
             new_document = string_data
             plagiarism_results = check_plagiarism(new_document, training_docs)
             chosen = plagiarism_results[0][0]
+            st.session_state.chosen_file = chosen
+            st.session_state.button_clicked = False
             st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {plagiarism_results[0][1]}')
-            st.write(f'Below is the content of {plagiarism_results[0][1]}:')
-            with open(chosen, 'r') as file:
-                file_content = file.read()
-            st.text(file_content)
-        if chosen is not None:
-            if st.button(f'Inspect {chosen}'):
-                try:
-                    with open(chosen, 'r') as file:
-                        file_content = file.read()
+            
+        if st.button(f'Inspect {st.session_state.chosen_file}'):
+            st.session_state.button_clicked = True
+            
+        if st.session_state.button_clicked and st.session_state.chosen_file:
+            try:
+                with open(st.session_state.chosen_file, 'r') as file:
+                    file_content = file.read()
                     
                     # Display the contents of the file on the page
-                    st.text(file_content)
-                except FileNotFoundError:
-                    st.error('File not found. Please ensure the file is in the app directory.')
+                st.text(file_content)
+            except FileNotFoundError:
+                st.error('File not found. Please ensure the file is in the app directory.')
+                st.session_state.button_clicked = False
         
             
         def save_to_file(content,name):
