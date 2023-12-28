@@ -20,10 +20,11 @@ with open("style.css") as f:
 st.title('FYI - Annologic Demo')
 
 def main():
+    st.sidebar.image(imag,width=80)
     
     page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
     
-    st.sidebar.image(imag,use_column_width=True)
+    
     if page == 'Home':
         st.header('Welcome to the Demo')
         st.write('This web app is created to illustrate two machine learning use cases that will impact the lives of creatives on the FYI application')
