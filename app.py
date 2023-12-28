@@ -186,8 +186,8 @@ def main():
             new_document = string_data
             plagiarism_results = check_plagiarism(new_document, training_docs)
             st.write(f'The input lyric is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
-            if st.button("View similar song"):
-                with open(plagiarism_results[0][0], 'r', encoding='utf-8') as file:
+            if st.button(f"Inspect {plagiarism_results[0][0]}"):
+                with open(f'./{plagiarism_results[0][0]}', 'r', encoding='utf-8') as file:
                     content = file.read()
                 st.write(content)
         
