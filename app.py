@@ -189,9 +189,14 @@ def main():
             
             viewsong = st.checkbox(f'Inspect {plagiarism_results[0][0]}')
             if viewsong:
-                with open(plagiarism_results[0][0], 'r', encoding='utf-8') as file:
-                    content = file.read()
-                st.text(content)
+                try:
+                    with open(plagiarism_results[0][0], 'r') as file:
+                        file_content = file.read()
+                
+                    # Display the contents of the file on the page
+                    st.text(file_content)
+                except FileNotFoundError:
+                    st.error('File not found. Please ensure the file is in the app directory.')
         
             
         def save_to_file(content,name):
