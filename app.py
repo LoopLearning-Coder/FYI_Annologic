@@ -162,9 +162,9 @@ def main():
         if st.button('View song directory'): 
             training_docs
         
-        method = st.selectbox('How do you want to enter your lyrics',['upload txt','Enter text'])
+        method = st.selectbox('How do you want to enter your lyrics',['upload txt file','Enter song lyrics'])
         # Textbox for user input
-        if method == 'Enter text':
+        if method == 'Enter song lyrics':
             user_input = st.text_area("Enter song lyrics:")
             #save_to_file(user_input,'user.txt')
             string_data = user_input
@@ -186,6 +186,10 @@ def main():
             new_document = string_data
             plagiarism_results = check_plagiarism(new_document, training_docs)
             st.write(f'The input lyric is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
+            if st.button("View similar song"):
+                with open(plagiarism_results[0][0], 'r', encoding='utf-8') as file:
+                    content = file.read()
+                st.write(content)
         
             #if st.button(f'View {plagiarism_results[0][0]}'): 
             #   with open(plagiarism_results[0][0], 'r') as file:
