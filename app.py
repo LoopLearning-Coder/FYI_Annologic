@@ -29,6 +29,8 @@ def main():
 
     st.write()
     st.write()
+    st.write()
+    st.write()
     page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
     
     
