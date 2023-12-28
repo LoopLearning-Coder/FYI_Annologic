@@ -91,7 +91,7 @@ def main():
                                              'F♯':6,'G♭':6,'G':7,'G♯':8,'A♭':8,'A':9,'B♭':9,'A♯':10,'B':11})
         if st.button('Predict Popularity'):
             #st.write('Predicting...')
-            prediction = model.predict(pred_df)
+            prediction = round(model.predict(pred_df),2)
             
             st.write(f'The predicted popularity of the music is {round(prediction[0],2)}\%')
     
