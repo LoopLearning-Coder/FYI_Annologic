@@ -93,7 +93,7 @@ def main():
             #st.write('Predicting...')
             prediction = model.predict(pred_df)
             pre = prediction[0]
-            st.write(f'The predicted popularity of the music is {round(pre,2)}\%')
+            st.write(f'The predicted popularity of the music is {round(pre,2)}%')
     
     elif page == 'Similarity Test':
         st.header('Check Similarity of your Lyrics')
