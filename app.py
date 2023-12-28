@@ -189,7 +189,7 @@ def main():
             st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {plagiarism_results[0][1]}')
 
         if chosen is not None:
-            if st.button(f'Inspect {chosen}')
+            if st.button(f'Inspect {chosen}'):
                 try:
                     with open(chosen, 'r') as file:
                         file_content = file.read()
