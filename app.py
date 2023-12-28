@@ -189,14 +189,11 @@ def main():
             
             viewsong = st.checkbox(f'Inspect {plagiarism_results[0][0]}')
             if viewsong:
-                with open(f'./{plagiarism_results[0][0]}', 'r', encoding='utf-8') as file:
+                with open(plagiarism_results[0][0], 'r', encoding='utf-8') as file:
                     content = file.read()
-                st.write(content)
+                st.text(content)
         
-            #if st.button(f'View {plagiarism_results[0][0]}'): 
-            #   with open(plagiarism_results[0][0], 'r') as file:
-            #      data = file.read()
-            # st.text(data)
+            
         def save_to_file(content,name):
             # Save content to a text file
             with open(name, "w") as file:
