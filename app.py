@@ -20,8 +20,10 @@ with open("style.css") as f:
 st.title('FYI - Annologic Demo')
 
 def main():
-    st.sidebar.image(imag,width=80)
     
+    col1,col2,col3 = st.sidebar.columns((1,1,1),gap='medium')
+    col2.image(imag,width=80)
+    st.empty()
     page = st.sidebar.selectbox('Choose a task',['Home','Similarity Test','Popularity Predictor'])
     
     
