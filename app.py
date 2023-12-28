@@ -192,7 +192,7 @@ def main():
             chosen = plagiarism_results[0][0]
             st.session_state.chosen_file = chosen
             st.session_state.button_clicked = False
-            st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {plagiarism_results[0][1]}')
+            st.write(f'The input lyric is most similar to the lyrics in {chosen} with a similarity score of {round(plagiarism_results[0][1],2)}')
 
 
         if st.session_state.chosen_file is not None:     
