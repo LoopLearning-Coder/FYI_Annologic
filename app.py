@@ -187,16 +187,16 @@ def main():
             plagiarism_results = check_plagiarism(new_document, training_docs)
             st.write(f'The input lyric is most similar to the lyrics in {plagiarism_results[0][0]} with a similarity score of {plagiarism_results[0][1]}')
             
-            viewsong = st.checkbox(f'Inspect {plagiarism_results[0][0]}')
-            if viewsong:
-                try:
-                    with open(plagiarism_results[0][0], 'r') as file:
-                        file_content = file.read()
+        viewsong = st.checkbox(f'Inspect {plagiarism_results[0][0]}')
+        if viewsong:
+            try:
+                with open(plagiarism_results[0][0], 'r') as file:
+                    file_content = file.read()
                 
-                    # Display the contents of the file on the page
-                    st.text(file_content)
-                except FileNotFoundError:
-                    st.error('File not found. Please ensure the file is in the app directory.')
+                # Display the contents of the file on the page
+                st.text(file_content)
+            except FileNotFoundError:
+                st.error('File not found. Please ensure the file is in the app directory.')
         
             
         def save_to_file(content,name):
